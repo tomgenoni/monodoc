@@ -1,0 +1,84 @@
+.tp-avatar {
+    position: relative;
+
+    &__img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+    }
+
+    &--xsmall {
+        width: map-fetch($avatar, xsmall, size);
+        height: map-fetch($avatar, xsmall, size);
+    }
+
+    &--small {
+        width: map-fetch($avatar, small, size);
+        height: map-fetch($avatar, small, size);
+
+        .tp-avatar__badge {
+            font-size: map-fetch($avatar, small, badge, font-size);
+            top: -2px;
+            right: -4px;
+            width: map-fetch($avatar, large, badge, size);
+            height: map-fetch($avatar, large, badge, size);
+        }
+    }
+
+    &--medium {
+        width: map-fetch($avatar, medium, size);
+        height: map-fetch($avatar, medium, size);
+
+        .tp-avatar__badge {
+            font-size: map-fetch($avatar, medium, badge, font-size);
+            top: -2px;
+            right: -2px;
+            width: map-fetch($avatar, medium, badge, size);
+            height: map-fetch($avatar, medium, badge, size);
+        }
+    }
+
+    &--large {
+        width: map-fetch($avatar, large, size);
+        height: map-fetch($avatar, large, size);
+
+        .tp-avatar__badge {
+            font-size: map-fetch($avatar, large, badge, font-size);
+            right: 0;
+            width: map-fetch($avatar, large, badge, size);
+            height: map-fetch($avatar, large, badge, size);
+        }
+    }
+
+    &--xlarge {
+        width: map-fetch($avatar, xlarge, size);
+        height: map-fetch($avatar, xlarge, size);
+
+        .tp-avatar__badge {
+            font-size: map-fetch($avatar, xlarge, badge, font-size);
+            right: 6px;
+            width: map-fetch($avatar, xlarge, badge, size);
+            height: map-fetch($avatar, xlarge, badge, size);
+        }
+    }
+
+    &__badge {
+        color: map-fetch($color, text, white);
+        position: absolute;
+        top: 0;
+        border-radius: 50%;
+        border: 2px solid map-fetch($color, ui, white);
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &--hired {
+            background: map-fetch($color, ui, good);
+        }
+
+        &--notification {
+            background: map-fetch($color, ui, danger);
+        }
+    }
+}
