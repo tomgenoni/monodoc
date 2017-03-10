@@ -1,12 +1,12 @@
-var gulp     = require('gulp'),
-    markdown = require('gulp-markdown'),
-    insert   = require('gulp-insert'),
-    marked   = require('marked'),
-    fs       = require('fs'),
-    wrap     = require('gulp-wrap'),
-    rename   = require('gulp-rename'),
-    concat_json    = require('gulp-concat-json'),
-    data     = require('gulp-data');
+var gulp        = require('gulp'),
+    markdown    = require('gulp-markdown'),
+    insert      = require('gulp-insert'),
+    marked      = require('marked'),
+    fs          = require('fs'),
+    wrap        = require('gulp-wrap'),
+    rename      = require('gulp-rename'),
+    concat_json = require('gulp-concat-json'),
+    data        = require('gulp-data');
 
 function filepath(file) {
     var pathArr = file.path.split('/');
@@ -30,7 +30,6 @@ gulp.task('copy:index', function() {
     return gulp.src('./template/index.html')
         .pipe(gulp.dest('dist'));
 });
-
 
 gulp.task('build:packages', function () {
     return gulp.src(['./src/**/readme.md'])
