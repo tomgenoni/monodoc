@@ -12,6 +12,7 @@
     "gulp": "^3.9.1",
     "gulp-append": "^0.3.4",
     "gulp-concat": "^2.6.1",
+    "gulp-concat-json": "^1.0.0",
     "gulp-data": "^1.2.1",
     "gulp-debug": "^3.1.0",
     "gulp-file-include": "^1.0.0",
@@ -19,9 +20,12 @@
     "gulp-inject-stringified-html": "^1.0.3",
     "gulp-insert": "^0.5.0",
     "gulp-markdown": "^1.2.0",
+    "gulp-merge-json": "^1.0.0",
     "gulp-nunjucks-render": "^2.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-wrap": "^0.13.0",
-    "marked": "^0.3.6"
+    "install": "^0.8.7",
+    "marked": "^0.3.6",
+    "npm": "^4.4.1"
   }
 }

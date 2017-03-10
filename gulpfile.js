@@ -4,7 +4,8 @@ var gulp     = require('gulp'),
     marked   = require('marked'),
     fs       = require('fs'),
     wrap     = require('gulp-wrap'),
-    rename     = require('gulp-rename'),
+    rename   = require('gulp-rename'),
+    concat_json    = require('gulp-concat-json'),
     data     = require('gulp-data');
 
 function filepath(file) {
@@ -14,7 +15,24 @@ function filepath(file) {
     return path;
 }
 
-gulp.task('build:package', function () {
+gulp.task('build:index', function () {
+    return gulp.src(['./src/**/package.json'])
+        .pipe(concat_json('index.json'))
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('copy:assets', function() {
+    return gulp.src('./assets/**/*')
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('copy:index', function() {
+    return gulp.src('./template/index.html')
+        .pipe(gulp.dest('dist'));
+});
+
+
+gulp.task('build:packages', function () {
     return gulp.src(['./src/**/readme.md'])
         .pipe(insert.append(function(file){
             return fs.readFileSync(filepath(file) + 'changelog.md', 'utf8');

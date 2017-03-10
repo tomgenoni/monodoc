@@ -1,7 +1,3 @@
----
-title: Avatar
----
-
 User images with an option for placing a badge.
 
 <div class="doc-example">
