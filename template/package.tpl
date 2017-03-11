@@ -43,15 +43,15 @@
 <body>
     <div class="doc-wrap">
         <h1><%= packageJSON.name %></h1>
-
-        <%= contents %>
-
         <table>
             <tr>
                 <td>Version</td>
                 <td><%= packageJSON.version %></td>
             </tr>
         </table>
+
+        <%= contents %>
+
 
     </div>
 </body>

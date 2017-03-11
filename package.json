@@ -23,9 +23,13 @@
     "gulp-merge-json": "^1.0.0",
     "gulp-nunjucks-render": "^2.0.0",
     "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
     "gulp-wrap": "^0.13.0",
     "install": "^0.8.7",
     "marked": "^0.3.6",
     "npm": "^4.4.1"
+  },
+  "dependencies": {
+    "del": "^2.2.2"
   }
 }

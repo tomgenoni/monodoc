@@ -2,18 +2,22 @@ function qs(i){
   return document.querySelector(i);
 }
 
-var hdbPackages = qs('#hlb-packages');
-var content     = qs('#content');
-var url         = 'index.json';
+var url = 'index.json';
 
 function fetchPackageData() {
   $.getJSON(url, renderIndex);
 }
 
 function renderIndex(data) {
-    var template = Handlebars.compile(hdbPackages.textContent);
-    var html = template(data);
-    content.innerHTML = html;
+    data.forEach(function(obj){
+        var data = {
+            packages: obj[Object.keys(obj)[0]],
+            title: Object.keys(obj)[0]
+        }
+        var template = Handlebars.compile($("#hlb-packages").text());
+        var html = template(data);
+        $("#content").append(html);
+    })
 }
 
 fetchPackageData();
