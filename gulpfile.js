@@ -34,7 +34,7 @@ function getVersion(path) {
 // Builds the documentation from all the readme files files in the source.
 gulp.task('build:packages', function () {
     return gulp.src(['./src/**/readme.md'])
-        // Append the changelog to the readme.
+        // Append the changelog to the readme. TODO: try 'request'
         .pipe(insert.append(function(file){
             return fs.readFileSync(filepath(file) + 'changelog.md', 'utf8');
         }))
@@ -50,21 +50,20 @@ gulp.task('build:packages', function () {
         }))
         // Change the file to index.html
         .pipe(rename(function(path) {
-            path.dirname += getVersion(path.dirname); //TODO: need to get version from package.json
+            path.dirname += getVersion(path.dirname); // Append version to directory path.
             path.basename = 'index';
         }))
         .pipe(gulp.dest('dist'));
 });
 
 // Builds the CSS required by that package.
-// TODO: will need to read package.json to include any dependencies on the fly.
 gulp.task('build:packages:sass', function () {
     return gulp.src(['./src/**/*.scss'])
         .pipe(insert.prepend(function(file){
             return fs.readFileSync('./assets/core.scss', 'utf8');
         }))
         .pipe(rename(function(path) {
-            path.dirname += getVersion(path.dirname); //TODO: need to get version from package.json
+            path.dirname += getVersion(path.dirname); // Append version to directory path.
             path.basename = "index"
         }))
         .pipe(sass())
