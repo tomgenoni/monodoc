@@ -79,10 +79,6 @@ gulp.task('build:packages:sass', function () {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('clean', function(cb) {
-    del(['tmp'], cb);
-});
-
 gulp.task('copy:assets', function() {
     return gulp.src('./assets/**/*')
         .pipe(gulp.dest('dist'));
@@ -91,4 +87,8 @@ gulp.task('copy:assets', function() {
 gulp.task('copy:index', function() {
     return gulp.src('./template/index.html')
         .pipe(gulp.dest('dist'));
+});
+
+gulp.task('clean', function(cb) {
+    del(['tmp'], cb);
 });
