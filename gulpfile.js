@@ -29,23 +29,7 @@ function getVersion(path) {
     return version;
 }
 
-// Initial step in building the JSON for use by the root index.html
-// Builds temporary JSON files that are consumed and discared in next step.
-gulp.task('build:typeJSON', function () {
-    packageTypes.forEach(function(type, index) {
-        return gulp.src(['./src/' + type + '/**/package.json'])
-            .pipe(concat_json(index + '-' + type + '-index.json'))
-            .pipe(insert.wrap('{"'+type+'":', '}'))
-            .pipe(gulp.dest('tmp'));
-    });
-});
-
-// Combine the JSON files into a single json file for use by index.json
-gulp.task('build:indexJSON', function () {
-    return gulp.src(['./tmp/*.json'])
-        .pipe(concat_json('index.json'))
-        .pipe(gulp.dest('dist'));
-});
+//------------------------------------------------------------------------//
 
 // Builds the documentation from all the readme files files in the source.
 gulp.task('build:packages', function () {
@@ -80,11 +64,34 @@ gulp.task('build:packages:sass', function () {
             return fs.readFileSync('./assets/core.scss', 'utf8');
         }))
         .pipe(rename(function(path) {
+            path.dirname += getVersion(path.dirname); //TODO: need to get version from package.json
             path.basename = "index"
         }))
         .pipe(sass())
         .pipe(gulp.dest('dist'));
 });
+
+//------------------------------------------------------------------------//
+
+// Initial step in building the JSON for use by the root index.html
+// Builds temporary JSON files that are consumed and discared in next step.
+gulp.task('build:typeJSON', function () {
+    packageTypes.forEach(function(type, index) {
+        return gulp.src(['./src/' + type + '/**/package.json'])
+            .pipe(concat_json(index + '-' + type + '-index.json'))
+            .pipe(insert.wrap('{"'+type+'":', '}'))
+            .pipe(gulp.dest('tmp'));
+    });
+});
+
+// Combine the JSON files into a single json file for use by index.json
+gulp.task('build:indexJSON', function () {
+    return gulp.src(['./tmp/*.json'])
+        .pipe(concat_json('index.json'))
+        .pipe(gulp.dest('dist'));
+});
+
+//------------------------------------------------------------------------//
 
 gulp.task('copy:indexjs', function() {
     return gulp.src('./assets/index.js')
