@@ -23,6 +23,12 @@ function filepath(file) {
     return path;
 }
 
+function getVersion(path) {
+    var obj = JSON.parse(fs.readFileSync('src/' + path + '/package.json', 'utf8'));
+    var version = '/' + obj.version;
+    return version;
+}
+
 // Initial step in building the JSON for use by the root index.html
 // Builds temporary JSON files that are consumed and discared in next step.
 gulp.task('build:typeJSON', function () {
@@ -60,7 +66,8 @@ gulp.task('build:packages', function () {
         }))
         // Change the file to index.html
         .pipe(rename(function(path) {
-            path.basename = "index"
+            path.dirname += getVersion(path.dirname); //TODO: need to get version from package.json
+            path.basename = 'index';
         }))
         .pipe(gulp.dest('dist'));
 });
@@ -79,8 +86,8 @@ gulp.task('build:packages:sass', function () {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('copy:assets', function() {
-    return gulp.src('./assets/**/*')
+gulp.task('copy:indexjs', function() {
+    return gulp.src('./assets/index.js')
         .pipe(gulp.dest('dist'));
 });
 
