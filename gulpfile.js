@@ -74,13 +74,27 @@ gulp.task('build:packages:sass', function () {
 
 // Initial step in building the JSON for use by the root index.html
 // Builds temporary JSON files that are consumed and discared in next step.
-gulp.task('build:typeJSON', function () {
-    return packageTypes.forEach(function(type, index) {
-        gulp.src(['./src/' + type + '/**/package.json'])
-            .pipe(concat_json(index + '-' + type + '-index.json'))
-            .pipe(insert.wrap('{"'+type+'":', '}'))
-            .pipe(gulp.dest('tmp'));
-    });
+// gulp.task('build:typeJSON', function () {
+//     return packageTypes.forEach(function(type, index) {
+//         gulp.src(['./src/' + type + '/**/package.json'])
+//             .pipe(concat_json(index + '-' + type + '-index.json'))
+//             .pipe(insert.wrap('{"'+type+'":', '}'))
+//             .pipe(gulp.dest('tmp'));
+//     });
+// });
+
+gulp.task('build:typeJSON:core', function () {
+    return gulp.src(['./src/core/**/package.json'])
+        .pipe(concat_json('0-core-index.json'))
+        .pipe(insert.wrap('{"core":', '}'))
+        .pipe(gulp.dest('tmp'));
+});
+
+gulp.task('build:typeJSON:component', function () {
+    return gulp.src(['./src/component/**/package.json'])
+        .pipe(concat_json('1-component-index.json'))
+        .pipe(insert.wrap('{"component":', '}'))
+        .pipe(gulp.dest('tmp'));
 });
 
 // Combine the JSON files into a single json file for use by index.json
@@ -96,8 +110,13 @@ gulp.task('build:indexJSON:clean', function(cb) {
 
 //------------------------------------------------------------------------//
 
-gulp.task('copy:indexjs', function() {
+gulp.task('copy:index:js', function() {
     return gulp.src('./assets/index.js')
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('copy:index:css', function() {
+    return gulp.src('./assets/index.css')
         .pipe(gulp.dest('dist'));
 });
 
@@ -116,9 +135,10 @@ gulp.task('build', function(callback) {
     runSequence('build:preclean',
                 'build:packages',
                 'build:packages:sass',
-                'build:typeJSON',
+                'build:typeJSON:core',
+                'build:typeJSON:component',
                 'build:indexJSON',
                 'build:indexJSON:clean',
-                ['copy:indexjs','copy:index']
+                ['copy:index:js','copy:index','copy:index:css']
                 );
 });

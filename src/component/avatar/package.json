@@ -9,6 +9,7 @@
   "author": "Tom Genoni <tom@atomeye.com> (http://atomeye.com)",
   "license": "ISC",
   "tpui": {
-      "type": "component"
+      "type": "component",
+      "status": "deprecated"
   }
 }
