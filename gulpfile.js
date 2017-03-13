@@ -6,6 +6,7 @@ var gulp        = require('gulp'),
     del         = require('del'),
     wrap        = require('gulp-wrap'),
     sass        = require('gulp-sass'),
+    runSequence = require('run-sequence');
     rename      = require('gulp-rename'),
     concat_json = require('gulp-concat-json'),
     data        = require('gulp-data');
@@ -41,17 +42,16 @@ gulp.task('build:packages', function () {
         // Pull the date from the package.json file for use by 'gulp-wrap'
         .pipe(data(function(file) {
             return {
-                'packageJSON': require( filepath(file) + 'package.json' )
+                'packageJSON': require(filepath(file) + 'package.json')
             }
         }))
         .pipe(markdown())
         .pipe(wrap({
             src: './template/package.tpl'
         }))
-        // Change the file to index.html
-        .pipe(rename(function(path) {
+        .pipe(rename(function(path, file) {
             path.dirname += getVersion(path.dirname); // Append version to directory path.
-            path.basename = 'index';
+            path.basename = 'index'; // Change the file to index.html
         }))
         .pipe(gulp.dest('dist'));
 });
@@ -64,7 +64,7 @@ gulp.task('build:packages:sass', function () {
         }))
         .pipe(rename(function(path) {
             path.dirname += getVersion(path.dirname); // Append version to directory path.
-            path.basename = "index"
+            path.basename = "index" // Change the file to index.css
         }))
         .pipe(sass())
         .pipe(gulp.dest('dist'));
@@ -75,8 +75,8 @@ gulp.task('build:packages:sass', function () {
 // Initial step in building the JSON for use by the root index.html
 // Builds temporary JSON files that are consumed and discared in next step.
 gulp.task('build:typeJSON', function () {
-    packageTypes.forEach(function(type, index) {
-        return gulp.src(['./src/' + type + '/**/package.json'])
+    return packageTypes.forEach(function(type, index) {
+        gulp.src(['./src/' + type + '/**/package.json'])
             .pipe(concat_json(index + '-' + type + '-index.json'))
             .pipe(insert.wrap('{"'+type+'":', '}'))
             .pipe(gulp.dest('tmp'));
@@ -88,6 +88,10 @@ gulp.task('build:indexJSON', function () {
     return gulp.src(['./tmp/*.json'])
         .pipe(concat_json('index.json'))
         .pipe(gulp.dest('dist'));
+});
+
+gulp.task('build:indexJSON:clean', function(cb) {
+    return del(['tmp'], cb);
 });
 
 //------------------------------------------------------------------------//
@@ -102,6 +106,19 @@ gulp.task('copy:index', function() {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('clean', function(cb) {
-    del(['tmp'], cb);
+gulp.task('build:preclean', function(cb) {
+    return del(['dist'], cb);
+});
+
+//------------------------------------------------------------------------//
+
+gulp.task('build', function(callback) {
+    runSequence('build:preclean',
+                'build:packages',
+                'build:packages:sass',
+                'build:typeJSON',
+                'build:indexJSON',
+                'build:indexJSON:clean',
+                ['copy:indexjs','copy:index']
+                );
 });
