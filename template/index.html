@@ -55,7 +55,7 @@
             <td colspan="4" class="doc-section__title">{{title}}</td>
         </tr>
         {{#each packages}}
-        <tr class="doc-package">
+        <tr class="doc-package" data-package-path="{{tpui.type}}/{{name}}/{{version}}/index.html">
             <td>
                 <div class="doc-package__title">{{name}}</div>
                 <div class="doc-package__description">{{description}}</div>
@@ -72,6 +72,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js" type="text/javascript"></script>
     <script src="//code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="index.js" type="text/javascript"></script>
-
 </body>
 </html>

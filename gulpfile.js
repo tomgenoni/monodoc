@@ -74,14 +74,9 @@ gulp.task('build:packages:sass', function () {
 
 // Initial step in building the JSON for use by the root index.html
 // Builds temporary JSON files that are consumed and discared in next step.
-// gulp.task('build:typeJSON', function () {
-//     return packageTypes.forEach(function(type, index) {
-//         gulp.src(['./src/' + type + '/**/package.json'])
-//             .pipe(concat_json(index + '-' + type + '-index.json'))
-//             .pipe(insert.wrap('{"'+type+'":', '}'))
-//             .pipe(gulp.dest('tmp'));
-//     });
-// });
+
+// TODO: combine these two into for each loop.
+// forEach wasn't finishing in time.
 
 gulp.task('build:typeJSON:core', function () {
     return gulp.src(['./src/core/**/package.json'])
