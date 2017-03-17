@@ -5,6 +5,7 @@ var gulp        = require('gulp'),
     fs          = require('fs'),
     del         = require('del'),
     wrap        = require('gulp-wrap'),
+    debug        = require('gulp-debug'),
     sass        = require('gulp-sass'),
     runSequence = require('run-sequence');
     rename      = require('gulp-rename'),
@@ -25,7 +26,7 @@ function filepath(file) {
 }
 
 function getVersion(path) {
-    var obj = JSON.parse(fs.readFileSync('src/' + path + '/package.json', 'utf8'));
+    var obj = JSON.parse(fs.readFileSync('../thumbprint-ui/packages/' + path + '/package.json', 'utf8'));
     var version = '/' + obj.version;
     return version;
 }
@@ -34,10 +35,10 @@ function getVersion(path) {
 
 // Builds the documentation from all the readme files files in the source.
 gulp.task('build:packages', function () {
-    return gulp.src(['./src/**/readme.md'])
+    return gulp.src('../thumbprint-ui/packages/*/README.md')
         // Append the changelog to the readme. TODO: try 'request'
         .pipe(insert.append(function(file){
-            return fs.readFileSync(filepath(file) + 'changelog.md', 'utf8');
+            return fs.readFileSync(filepath(file) + 'CHANGELOG.md', 'utf8');
         }))
         // Pull the date from the package.json file for use by 'gulp-wrap'
         .pipe(data(function(file) {
@@ -53,21 +54,20 @@ gulp.task('build:packages', function () {
             path.dirname += getVersion(path.dirname); // Append version to directory path.
             path.basename = 'index'; // Change the file to index.html
         }))
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('./dist'));
 });
 
 // Builds the CSS required by that package.
 gulp.task('build:packages:sass', function () {
-    return gulp.src(['./src/**/*.scss'])
-        .pipe(insert.prepend(function(file){
-            return fs.readFileSync('./assets/core.scss', 'utf8');
-        }))
-        .pipe(rename(function(path) {
-            path.dirname += getVersion(path.dirname); // Append version to directory path.
-            path.basename = "index" // Change the file to index.css
+    return gulp.src('../thumbprint-ui/packages/*/_index.scss')
+        .pipe(rename({
+            basename: "index"
         }))
         .pipe(sass())
-        .pipe(gulp.dest('dist'));
+        .pipe(rename(function(path) {
+            path.dirname += getVersion(path.dirname); // Append version to directory path.
+        }))
+        .pipe(gulp.dest('./dist'));
 });
 
 //------------------------------------------------------------------------//
@@ -75,32 +75,11 @@ gulp.task('build:packages:sass', function () {
 // Initial step in building the JSON for use by the root index.html
 // Builds temporary JSON files that are consumed and discared in next step.
 
-// TODO: combine these two into for each loop.
-// forEach wasn't finishing in time.
-
-gulp.task('build:typeJSON:core', function () {
-    return gulp.src(['./src/core/**/package.json'])
-        .pipe(concat_json('0-core-index.json'))
-        .pipe(insert.wrap('{"core":', '}'))
-        .pipe(gulp.dest('tmp'));
-});
-
-gulp.task('build:typeJSON:component', function () {
-    return gulp.src(['./src/component/**/package.json'])
-        .pipe(concat_json('1-component-index.json'))
-        .pipe(insert.wrap('{"component":', '}'))
-        .pipe(gulp.dest('tmp'));
-});
-
 // Combine the JSON files into a single json file for use by index.json
 gulp.task('build:indexJSON', function () {
-    return gulp.src(['./tmp/*.json'])
+    return gulp.src('../thumbprint-ui/packages/*/package.json')
         .pipe(concat_json('index.json'))
         .pipe(gulp.dest('dist'));
-});
-
-gulp.task('build:indexJSON:clean', function(cb) {
-    return del(['tmp'], cb);
 });
 
 //------------------------------------------------------------------------//
@@ -130,10 +109,7 @@ gulp.task('build', function(callback) {
     runSequence('build:preclean',
                 'build:packages',
                 'build:packages:sass',
-                'build:typeJSON:core',
-                'build:typeJSON:component',
                 'build:indexJSON',
-                'build:indexJSON:clean',
                 ['copy:index:js','copy:index','copy:index:css']
                 );
 });

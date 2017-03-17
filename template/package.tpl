@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://thumbprint.thumbtack.com/asset/css/thumbprint.min-6.0.0.css">
 
-    <title><%= packageJSON.tpui.type %>/<%= packageJSON.name %>@<%= packageJSON.version %></title>
+    <title><%= packageJSON.thumbprint.category %> : <%= packageJSON.name %>@<%= packageJSON.version %></title>
     <style>
 
         body {
@@ -22,8 +22,7 @@
 
         h1 {
             margin-bottom: 20px;
-            font-size: 30px;
-            text-transform: capitalize;
+            font-size: 13px;
         }
 
         h2 {
@@ -42,7 +41,7 @@
 </head>
 <body>
     <div class="doc-wrap">
-        <h1><%= packageJSON.name %></h1>
+        <h2><%= packageJSON.thumbprint.displayName %></h2>
         <table>
             <tr>
                 <td>Version</td>

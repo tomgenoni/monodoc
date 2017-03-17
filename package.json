@@ -12,6 +12,7 @@
     "gulp": "^3.9.1",
     "gulp-concat-json": "^1.0.0",
     "gulp-data": "^1.2.1",
+    "gulp-debug": "^3.1.0",
     "gulp-insert": "^0.5.0",
     "gulp-markdown": "^1.2.0",
     "gulp-rename": "^1.2.2",

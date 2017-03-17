@@ -17,22 +17,6 @@
         <div class="doc-head">
             <div class="doc-filters">
                 <input type="text" class="tp-text-input">
-                <div class="doc-filters__title">Show</div>
-                <div class="tp-input-row">
-                    <input class="tp-checkbox-input" name="foo-1" id="foo-1a" type="checkbox">
-                    <div class="tp-checkbox-image"></div>
-                    <label class="tp-label" for="foo-2a">Active</label>
-                </div>
-                <div class="tp-input-row">
-                    <input class="tp-checkbox-input" name="foo-2" id="foo-2a" type="checkbox">
-                    <div class="tp-checkbox-image"></div>
-                    <label class="tp-label" for="foo-2a">Deprecated</label>
-                </div>
-                <div class="tp-input-row">
-                    <input class="tp-checkbox-input" name="foo-3" id="foo-3a" type="checkbox">
-                    <div class="tp-checkbox-image"></div>
-                    <label class="tp-label" for="foo-2a">Experimental</label>
-                </div>
             </div>
         </div>
 
@@ -41,8 +25,6 @@
                 <tr>
                     <th>Package</th>
                     <th>Version</th>
-                    <th>Status</th>
-                    <th>Updated</th>
                 </tr>
             </thead>
             <tbody id="content">
@@ -51,20 +33,13 @@
     </div>
 
     <script id="hlb-packages" type="text/x-handlebars-template">
-        <tr class="doc-section">
-            <td colspan="4" class="doc-section__title">{{title}}</td>
-        </tr>
-        {{#each packages}}
-        <tr class="doc-package" data-package-path="{{tpui.type}}/{{name}}/{{version}}/index.html">
+        {{#each this}}
+        <tr class="doc-package" data-package-path="../{{cleanName name}}/{{version}}/index.html">
             <td>
-                <div class="doc-package__title">{{name}}</div>
+                <div class="doc-package__title">{{cleanName name}}</div>
                 <div class="doc-package__description">{{description}}</div>
             </td>
             <td class="doc-package__version">{{version}}</td>
-            <td>
-                <span class="doc-tag doc-tag--{{tpui.status}}">{{tpui.status}}</span>
-            </td>
-            <td class="doc-package__updated">1 month ago</td>
         </tr>
         {{/each}}
     </script>
