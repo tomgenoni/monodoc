@@ -72,10 +72,7 @@ gulp.task('build:packages:sass', function () {
 
 //------------------------------------------------------------------------//
 
-// Initial step in building the JSON for use by the root index.html
-// Builds temporary JSON files that are consumed and discared in next step.
-
-// Combine the JSON files into a single json file for use by index.json
+// Combine the JSON files into a single json file for use by index.js
 gulp.task('build:indexJSON', function () {
     return gulp.src('../thumbprint-ui/packages/*/package.json')
         .pipe(concat_json('index.json'))
