@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <!-- TUI normalize -->
+    <link rel="stylesheet" href="../../assets/css/common/tp-normalize.css">
+
     <!-- TUI fonts -->
     <link rel="stylesheet" href="../../assets/css/common/tp-font.css">
 
@@ -26,7 +29,7 @@
 <body class="doc-package">
     <div class="doc-wrap">
         <h2><%= packageJSON.thumbprint.displayName %></h2>
-        <table>
+        <table class="doc-meta">
             <tr>
                 <td>Version</td>
                 <td><%= packageJSON.version %></td>
@@ -34,6 +37,7 @@
         </table>
 
         <%= contents %>
+
 
     </div>
 </body>

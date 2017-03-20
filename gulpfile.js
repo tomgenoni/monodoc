@@ -35,9 +35,9 @@ function getVersion(path) {
 gulp.task('build:packages', function () {
     return gulp.src('../thumbprint-ui/packages/*/README.md')
         // Append the changelog to the readme. TODO: try 'request'
-        .pipe(insert.append(function(file){
-            return fs.readFileSync(filepath(file) + 'CHANGELOG.md', 'utf8');
-        }))
+        // .pipe(insert.append(function(file){
+        //     return fs.readFileSync(filepath(file) + 'CHANGELOG.md', 'utf8');
+        // }))
         // Pull the date from the package.json file for use by 'gulp-wrap'
         .pipe(data(function(file) {
             return {
