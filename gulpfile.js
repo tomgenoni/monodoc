@@ -5,17 +5,15 @@ var gulp        = require('gulp'),
     fs          = require('fs'),
     del         = require('del'),
     wrap        = require('gulp-wrap'),
-    debug        = require('gulp-debug'),
+    debug       = require('gulp-debug'),
     sass        = require('gulp-sass'),
     runSequence = require('run-sequence');
     rename      = require('gulp-rename'),
     concat_json = require('gulp-concat-json'),
     data        = require('gulp-data');
 
-var packageTypes = [
-    'core',
-    'component'
-]
+// Make package.json
+var packageJSON = JSON.parse(fs.readFileSync('./package.json'));
 
 // Gets file path from a file in stream.
 function filepath(file) {
@@ -61,11 +59,14 @@ gulp.task('build:packages', function () {
 gulp.task('build:packages:sass', function () {
     return gulp.src('../thumbprint-ui/packages/*/_index.scss')
         .pipe(rename({
-            basename: "index"
+            basename: "package"
         }))
         .pipe(sass())
         .pipe(rename(function(path) {
             path.dirname += getVersion(path.dirname); // Append version to directory path.
+        }))
+        .pipe(insert.prepend(function(file){
+            return fs.readFileSync('./assets/main.css', 'utf8');
         }))
         .pipe(gulp.dest('./dist'));
 });
@@ -91,6 +92,11 @@ gulp.task('copy:index:css', function() {
         .pipe(gulp.dest('dist'));
 });
 
+gulp.task('copy:package:css', function() {
+    return gulp.src('./assets/package-layout.css')
+        .pipe(gulp.dest('dist'));
+});
+
 gulp.task('copy:index', function() {
     return gulp.src('./template/index.html')
         .pipe(gulp.dest('dist'));
@@ -107,6 +113,11 @@ gulp.task('build', function(callback) {
                 'build:packages',
                 'build:packages:sass',
                 'build:indexJSON',
-                ['copy:index:js','copy:index','copy:index:css']
+                [
+                    'copy:index:js',
+                    'copy:index',
+                    'copy:package:css',
+                    'copy:index:css'
+                ]
                 );
 });
