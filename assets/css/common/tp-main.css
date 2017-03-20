@@ -1,0 +1,19 @@
+html {
+    background-color: white;
+}
+
+body {
+    color: #4e4d4d;
+    font-family: Foobar, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+p {
+    margin-bottom: 12px;
+}

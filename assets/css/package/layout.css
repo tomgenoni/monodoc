@@ -1,0 +1,14 @@
+.doc-package h1 {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.doc-package h2 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+.doc-package #change-log {
+    font-size: 30px;
+}

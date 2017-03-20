@@ -65,9 +65,6 @@ gulp.task('build:packages:sass', function () {
         .pipe(rename(function(path) {
             path.dirname += getVersion(path.dirname); // Append version to directory path.
         }))
-        .pipe(insert.prepend(function(file){
-            return fs.readFileSync('./assets/main.css', 'utf8');
-        }))
         .pipe(gulp.dest('./dist'));
 });
 
@@ -82,28 +79,18 @@ gulp.task('build:indexJSON', function () {
 
 //------------------------------------------------------------------------//
 
-gulp.task('copy:index:js', function() {
-    return gulp.src('./assets/index.js')
-        .pipe(gulp.dest('dist'));
+gulp.task('build:preclean', function(cb) {
+    return del(['dist'], cb);
 });
 
-gulp.task('copy:index:css', function() {
-    return gulp.src('./assets/index.css')
-        .pipe(gulp.dest('dist'));
-});
-
-gulp.task('copy:package:css', function() {
-    return gulp.src('./assets/package-layout.css')
-        .pipe(gulp.dest('dist'));
+gulp.task('copy:assets', function() {
+    return gulp.src('./assets/**/*')
+        .pipe(gulp.dest('dist/assets'));
 });
 
 gulp.task('copy:index', function() {
     return gulp.src('./template/index.html')
         .pipe(gulp.dest('dist'));
-});
-
-gulp.task('build:preclean', function(cb) {
-    return del(['dist'], cb);
 });
 
 //------------------------------------------------------------------------//
@@ -114,10 +101,8 @@ gulp.task('build', function(callback) {
                 'build:packages:sass',
                 'build:indexJSON',
                 [
-                    'copy:index:js',
                     'copy:index',
-                    'copy:package:css',
-                    'copy:index:css'
+                    'copy:assets'
                 ]
-                );
+            );
 });

@@ -15,18 +15,3 @@
     font-weight: 600;
     src: url("//thumbprint.thumbtack.com/asset/font/721269/aad99a1f-7917-4dd6-bbb5-b07cedbff64f.woff2") format("woff2"), url("//thumbprint.thumbtack.com/asset/font/721269/91b50bbb-9aa1-4d54-9159-ec6f19d14a7c.woff") format("woff")
 }
-
-html {
-    background-color: white;
-}
-
-body {
-    color: #4e4d4d;
-    font-family: Foobar, Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-p {
-    margin-bottom: 12px;
-}
