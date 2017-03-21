@@ -13,12 +13,14 @@
     "gulp-concat-json": "^1.0.0",
     "gulp-data": "^1.2.1",
     "gulp-debug": "^3.1.0",
+    "gulp-dom": "^0.9.17",
     "gulp-insert": "^0.5.0",
     "gulp-markdown": "^1.2.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-wrap": "^0.13.0",
     "marked": "^0.3.6",
+    "prismjs": "^1.6.0",
     "run-sequence": "^1.2.2"
   },
   "dependencies": {

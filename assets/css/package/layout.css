@@ -1,4 +1,11 @@
-.doc-package h1 {
+.doc-package .doc-wrap > p,
+.doc-package .doc-wrap > ul > li,
+.doc-package .doc-wrap > ol > li {
+    font-size: 14px;
+}
+
+/*Hide the H1 that displays the full component name*/
+.doc-package h1[id^="-tp-ui-"] {
     display: none;
 }
 
@@ -10,7 +17,12 @@
 .doc-package h2 {
     font-size: 18px;
     font-weight: 500;
-    margin: 40px 0 10px;
+    margin: 50px 0 10px;
+}
+
+.doc-big-title {
+    margin-top: 50px;
+    font-size: 40px;
 }
 
 .doc-package p {
@@ -18,9 +30,12 @@
 }
 
 .doc-package .doc-meta {
-    font-family: monospace;
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: 30px;
+}
+
+.doc-package .doc-meta td {
+    padding-right: 10px;
 }
 
 .doc-package #change-log {
@@ -39,4 +54,17 @@
 
 .doc-example--dark {
     background: #444;
+}
+
+.doc-pre-example {
+    margin: 0;
+    position: relative;
+    overflow-x: scroll;
+    max-height: 300px;
+    font-size: 12px;
+    line-height: 1.5;
+    border: 1px solid #f5f5f5;
+    padding: 20px;
+    line-height: 18px;
+    margin-bottom: 20px;
 }

@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <!-- For source code -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+
     <!-- TUI normalize -->
     <link rel="stylesheet" href="../../assets/css/common/tp-normalize.css">
 
@@ -17,6 +20,9 @@
 
     <!-- Common styles for listing and package detail -->
     <link rel="stylesheet" href="../../assets/css/common/layout.css">
+
+    <!-- Prism syntax highlighting  -->
+    <link rel="stylesheet" href="../../assets/css/common/prism.css">
 
     <!-- Package layout styling  -->
     <link rel="stylesheet" href="../../assets/css/package/layout.css">
@@ -34,10 +40,13 @@
                 <td>Version</td>
                 <td><%= packageJSON.version %></td>
             </tr>
+            <tr>
+                <td>Sass Source</td>
+                <td><a href="https://github.com/thumbtack/thumbprint-ui/blob/master/packages/<%= packageJSON.name %>/_index.scss"><%= packageJSON.name %></a></td>
+            </tr>
         </table>
 
         <%= contents %>
-
 
     </div>
 </body>
