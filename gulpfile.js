@@ -12,6 +12,9 @@ var gulp        = require('gulp'),
     concat_json = require('gulp-concat-json'),
     prism       = require('prismjs'),
     dom         = require('gulp-dom'),
+    replace     = require('gulp-replace'),
+    beautify    = require('gulp-beautify'),
+    rename      = require('gulp-rename'),
     data        = require('gulp-data');
 
 // Make package.json
@@ -29,6 +32,12 @@ function getVersion(path) {
     var obj = JSON.parse(fs.readFileSync('../thumbprint-ui/packages/' + path + '/package.json', 'utf8'));
     var version = '/' + obj.version;
     return version;
+}
+
+function getColorPath() {
+    var obj = JSON.parse(fs.readFileSync('../thumbprint-ui/packages/tp-ui-core-color/package.json', 'utf8'));
+    var path = './dist/tp-ui-core-color/' + obj.version;
+    return path;
 }
 
 //------------------------------------------------------------------------//
@@ -62,6 +71,35 @@ gulp.task('build:packages:sass', function () {
     return gulp.src('./assets/sass/thumbprint-all.scss')
         .pipe(sass())
         .pipe(gulp.dest('./dist/assets/css/common'));
+});
+
+
+//------------------------------------------------------------------------//
+
+// Converts tp-ui-color-variable sass variable obj into a JSON file
+// for easier documentation.
+// TODO: convert variables to JSON.
+gulp.task('build:color:json', function(){
+    gulp.src('../thumbprint-ui/packages/tp-ui-core-color/_index.scss')
+        .pipe(replace(/^@import.*;/gm, "")) // remove import statements
+        .pipe(replace(/ ?(\/\/ ?.*)/gm, "")) // remove comments
+        .pipe(replace(/^\s*\n/gm, "")) // remove blank lines
+        .pipe(replace(/\;/g, ",")) // change ; to ,
+        .pipe(replace(/([a-zA-Z0-9$\-\#]+)\s*:\s*([a-zA-Z0-9\-\#\$]+ ?[a-zA-Z0-9.,\-\#\'\%\$ ?\(\)]+)/gm, "\"$1\":\"$2\"")) // wrap pairs in quotes
+        .pipe(replace(/([a-zA-Z0-9$\-]+) ?:/g, "\"$1\":")) // convert parent variable names
+        .pipe(replace(/,"/g, "\",")) // swap comma with last closing quote in pairs
+        .pipe(replace(/(.*)(\()$/gm, "$1 {")) // convert ( to { where needed
+        .pipe(replace(/^(\s+|)(\))/gm, "$1}")) // convert ) to } where needed
+        .pipe(replace(/.*(}),\n$/gm, "$1\n")) // remove final comma
+        .pipe(wrap('{\n<%= contents %>}')) // wrap contents in {} for valid JSON
+        .pipe(beautify({indent_size: 4})) // indent file
+        .pipe(rename('var-color.json'))
+        .pipe(gulp.dest('./dist/assets/data'));
+});
+
+gulp.task('build:color:template', function(){
+    return gulp.src('./assets/package/color/color.html')
+        .pipe(gulp.dest(getColorPath()));
 });
 
 //------------------------------------------------------------------------//
@@ -114,20 +152,6 @@ function renderCodeExamples(dom) {
     return dom;
 }
 
-// Add in clipboard button to raw code examples
-function insertClipboardButton(dom) {
-    var preExamples = dom.querySelectorAll('.doc-pre-example');
-    for (i = 0; i < preExamples.length; i++) {
-        var preExample = preExamples[i];
-        var parent = preExample.parentNode;
-        var clipboardWrap = dom.createElement("div");
-
-        clipboardWrap.classList.add("doc-clipboard-wrap");
-        clipboardWrap.innerHTML = "<button class=doc-clipboard></button><a href='#' class=fiddle-link data-playground=jsfiddle data-playground-from-group=fiddle-code-"+i+" data-playground-resources='https://thumbprint.thumbtack.com/asset/css/thumbprint.min-"+project.version+".css'></a>";
-        parent.insertBefore(clipboardWrap, preExample.nextSibling);
-    }
-    return dom;
-}
 
 // Build the single page file from the JSON.
 gulp.task('build:examples', function() {
@@ -135,7 +159,6 @@ gulp.task('build:examples', function() {
         .pipe(dom(function(){
             var dom = this;
             renderCodeExamples(dom);
-            //insertClipboardButton(dom);
             return dom;
         }))
         .pipe(gulp.dest('./dist' ))
@@ -150,6 +173,8 @@ gulp.task('build', function(callback) {
                 'build:examples',
                 'build:packages:sass',
                 'build:indexJSON',
+                'build:color:template',
+                'build:color:json',
                 [
                     'copy:index',
                     'copy:assets'

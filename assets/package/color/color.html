@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- All of Thumbprint UI -->
+    <link rel="stylesheet" href="../../assets/css/common/thumbprint-all.css">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
+    <title>Colors</title>
+
+    <style>
+
+        body {
+            margin: 50px;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        #results {
+            list-style: none;
+            padding-left: 0;
+            margin-left: 0;
+        }
+
+        .section {
+            font-size: 20px;
+            font-weight: 500;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            margin-left: -20px;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .meta > li {
+            margin-bottom: 30px;
+            margin-left: 20px;
+            width: 350px;
+        }
+
+        .swatch {
+            width: 100px;
+            height: 30px;
+            margin-bottom: 5px;
+        }
+
+        h1 {
+            font-size: 40px;
+            font-weight: 500;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <h1>Colors</h1>
+
+    <ul id="results"></ul>
+
+    <script id="hlb-swatches" type="text/x-handlebars-template">
+      {{#each this}}
+        <li>
+            <div class="section">{{title}}</div>
+            <ul class="meta">
+            {{#each meta}}
+                <li>
+                    <div class="swatch" style="background-color: {{hex}}"></div>
+                    <div class="swatch-name">{{../title}}.{{name}}</div>
+                    <div class="swatch-hex">{{hex}}</div>
+                    <div class="swatch-sass">{{sassVar}};</div>
+                </li>
+            {{/each}}
+            </ul>
+        </li>
+      {{/each}}
+    </script>
+
+
+    <script>
+
+    $( document ).ready(function() {
+
+        function qs(i){
+          return document.querySelector(i);
+        }
+
+        var hdbSwatches = qs('#hlb-swatches');
+        var results    = qs('#results');
+
+        // convert string to json path
+        function ref(obj, str) {
+            str = str.split(".");
+            for (var i = 0; i < str.length; i++)
+                obj = obj[str[i]];
+            return obj;
+        }
+
+        $.getJSON( "../../assets/data/var-color.json", function(data) {
+
+
+            var colors = data['$tp-color'];
+            var colorData = [];
+            var counter = 0;
+
+            $.each(colors, function(title, val) {
+
+                // section title
+                colorData.push({
+                   title: title,
+                   meta: []
+                });
+
+                var values = [];
+
+                $.each(val, function(name, sassVar) {
+
+                    // get hex value
+                    var jsonPath = sassVar.replace(/tp-get\((.*)\)/gm, "$1");
+                    jsonPath = jsonPath.replace(/,\s*/g, ".");
+                    var hex = ref(data, jsonPath);
+
+                    colorData[counter].meta.push({
+                        name: name,
+                        sassVar: 'tp-get($colors, '+ title +', '+name+')',
+                        hex: hex
+                    });
+                });
+
+                counter++
+            });
+
+            var template = Handlebars.compile(hdbSwatches.textContent);
+            var html = template(colorData);
+            results.innerHTML = html;
+
+        });
+
+    });
+
+
+    </script>
+
+
+</body>
+</html>

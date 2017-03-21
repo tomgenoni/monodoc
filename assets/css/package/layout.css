@@ -20,6 +20,12 @@
     margin: 50px 0 10px;
 }
 
+.doc-package h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 30px 0 10px;
+}
+
 .doc-big-title {
     margin-top: 50px;
     font-size: 40px;
@@ -67,4 +73,8 @@
     padding: 15px;
     line-height: 18px;
     margin-bottom: 20px;
+}
+
+.doc-example + .doc-pre-example {
+    border-top: 0;
 }
