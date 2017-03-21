@@ -8,15 +8,8 @@
     <!-- For source code -->
     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
 
-    <!-- TUI normalize -->
-    <link rel="stylesheet" href="../../assets/css/common/tp-normalize.css">
-
-    <!-- TUI fonts -->
-    <link rel="stylesheet" href="../../assets/css/common/tp-font.css">
-
-    <!-- TUI main -->
-    <link rel="stylesheet" href="../../assets/css/common/tp-main.css">
-
+    <!-- All of Thumbprint UI -->
+    <link rel="stylesheet" href="../../assets/css/common/thumbprint-all.css">
 
     <!-- Common styles for listing and package detail -->
     <link rel="stylesheet" href="../../assets/css/common/layout.css">
@@ -27,8 +20,6 @@
     <!-- Package layout styling  -->
     <link rel="stylesheet" href="../../assets/css/package/layout.css">
 
-    <!-- Package styling direct from Sass partial  -->
-    <link rel="stylesheet" href="package.css">
 
     <title><%= packageJSON.name %>@<%= packageJSON.version %></title>
 </head>

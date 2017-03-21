@@ -1,3 +1,8 @@
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 .doc-wrap {
     max-width: 1020px;
     padding: 40px 20px;

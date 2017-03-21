@@ -59,15 +59,9 @@ gulp.task('build:packages', function () {
 
 // Builds the CSS required by that package.
 gulp.task('build:packages:sass', function () {
-    return gulp.src('../thumbprint-ui/packages/*/_index.scss')
-        .pipe(rename({
-            basename: "package"
-        }))
+    return gulp.src('./assets/sass/thumbprint-all.scss')
         .pipe(sass())
-        .pipe(rename(function(path) {
-            path.dirname += getVersion(path.dirname); // Append version to directory path.
-        }))
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest('./dist/assets/css/common'));
 });
 
 //------------------------------------------------------------------------//
