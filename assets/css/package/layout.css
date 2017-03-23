@@ -4,9 +4,15 @@
     font-size: 14px;
 }
 
+.doc-package .doc-wrap > ol,
 .doc-package .doc-wrap > ul {
+    margin-bottom: 12px;
     margin-left: 30px;
     list-style: disc;
+}
+
+.doc-package .doc-wrap > ol {
+    list-style: decimal;
 }
 
 /*Hide the H1 that displays the full component name*/
@@ -82,4 +88,13 @@
 
 .doc-example + .doc-pre-example {
     border-top: 0;
+}
+
+.doc-example-box {
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background: #ddd;
+    border-radius: 2px;
+    border: 1px solid #ccc;
 }
