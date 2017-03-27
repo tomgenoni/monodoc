@@ -17,8 +17,6 @@ var gulp        = require('gulp'),
     rename      = require('gulp-rename'),
     data        = require('gulp-data');
 
-// Make package.json
-var packageJSON = JSON.parse(fs.readFileSync('./package.json'));
 
 // Gets file path from a file in stream.
 function filepath(file) {
@@ -40,6 +38,11 @@ function getColorPath() {
     return path;
 }
 
+function getDirectory(obj) {
+    var directory = obj.name.split('/')[1];
+    return directory;
+}
+
 //------------------------------------------------------------------------//
 
 // Builds the documentation from all the readme files files in the source.
@@ -52,12 +55,13 @@ gulp.task('build:packages', function () {
         // Pull the date from the package.json file for use by 'gulp-wrap'
         .pipe(data(function(file) {
             return {
-                'packageJSON': require(filepath(file) + 'package.json')
+                'packageJSON': require(filepath(file) + 'package.json'),
+                'directory': getDirectory(require(filepath(file) + 'package.json'))
             }
         }))
         .pipe(markdown())
         .pipe(wrap({
-            src: './template/package.tpl'
+            src: './template/package.tpl',
         }))
         .pipe(rename(function(path, file) {
             path.dirname += getVersion(path.dirname); // Append version to directory path.

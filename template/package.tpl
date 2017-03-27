@@ -33,7 +33,11 @@
             </tr>
             <tr>
                 <td>Sass Source</td>
-                <td><a href="https://github.com/thumbtack/thumbprint-ui/blob/master/packages/<%= packageJSON.name %>/_index.scss"><%= packageJSON.name %></a></td>
+                <td><a href="https://github.com/thumbtack/thumbprint-ui/blob/master/packages/<%= directory %>/_index.scss"><%= packageJSON.name %></a></td>
+            </tr>
+            <tr>
+                <td>Install</td>
+                <td><code>npm install <%= packageJSON.name %> --save-dev</code></td>
             </tr>
         </table>
 
