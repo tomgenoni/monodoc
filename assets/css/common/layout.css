@@ -3,6 +3,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+p {
+    margin-bottom: .75em;
+}
+
 .doc-wrap {
     max-width: 1020px;
     padding: 40px 20px;

@@ -1,0 +1,40 @@
+{
+    "rules": {
+        "block-no-empty": true,
+        "block-closing-brace-newline-after": [ "always", {
+            "ignoreAtRules": ["if", "else"]
+        } ],
+        "block-opening-brace-newline-after": "always",
+        "color-hex-case": [ "lower", {
+            "message": "Lowercase letters are easier to distinguish from numbers"
+        } ],
+        "color-no-invalid-hex": true,
+        "comment-empty-line-before": [ "always", {
+            "ignore": ["stylelint-commands", "after-comment"]
+        } ],
+        "declaration-block-no-duplicate-properties": true,
+        "declaration-block-single-line-max-declarations": 1,
+        "declaration-block-semicolon-newline-after": "always",
+        "declaration-block-semicolon-space-before": "never",
+        "declaration-block-trailing-semicolon": "always",
+        "declaration-colon-space-after": "always",
+        "declaration-colon-space-before": "never",
+        "function-comma-space-after" : "always",
+        "function-url-quotes" : "always",
+        "function-name-case" : "lower",
+        "indentation": 4,
+        "length-zero-no-unit" : true,
+        "max-empty-lines": 1,
+        "max-nesting-depth": 3,
+        "no-duplicate-selectors": true,
+        "number-leading-zero": "always",
+        "number-no-trailing-zeros": true,
+        "rule-empty-line-before": [ "always", {
+            "ignore": ["after-comment"]
+        } ],
+        "string-quotes" : "single",
+        "unit-whitelist": ["em", "rem", "%", "s", "px", "ms", "deg"],
+        "unit-no-unknown": true,
+        "value-no-vendor-prefix" : true
+    }
+}

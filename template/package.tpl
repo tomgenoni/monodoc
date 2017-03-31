@@ -20,6 +20,9 @@
     <!-- Package layout styling  -->
     <link rel="stylesheet" href="../../assets/css/package/layout.css">
 
+    <!-- Package specific styling  -->
+    <link rel="stylesheet" href="../../assets/css/package/package.css">
+
 
     <title><%= packageJSON.name %>@<%= packageJSON.version %></title>
 </head>

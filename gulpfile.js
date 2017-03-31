@@ -11,6 +11,9 @@ var gulp        = require('gulp'),
     rename      = require('gulp-rename'),
     concat_json = require('gulp-concat-json'),
     prism       = require('prismjs'),
+    postcss = require('gulp-postcss'),
+    reporter = require('postcss-reporter'),
+    stylelint = require('stylelint'),
     dom         = require('gulp-dom'),
     replace     = require('gulp-replace'),
     beautify    = require('gulp-beautify'),
@@ -168,6 +171,22 @@ gulp.task('build:examples', function() {
         .pipe(gulp.dest('./dist' ))
 });
 
+//------------------------------------------------------------------------//
+
+gulp.task('deploy-docs', function() {
+    var config = JSON.parse(fs.readFileSync('./aws.json'));
+    var s3     = require('gulp-s3-upload')(config);
+
+    return gulp.src('./dist/**/*')
+        .pipe(s3({
+            Bucket: 'thumbprint', // Required
+            ACL   : 'public-read', // Needs to be user-defined
+            keyTransform: function(relative_filename) {
+                var new_name = "docs/" + relative_filename;
+                return new_name;
+            }
+        }))
+});
 
 //------------------------------------------------------------------------//
 
