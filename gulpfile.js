@@ -11,9 +11,9 @@ var gulp        = require('gulp'),
     rename      = require('gulp-rename'),
     concat_json = require('gulp-concat-json'),
     prism       = require('prismjs'),
-    postcss = require('gulp-postcss'),
-    reporter = require('postcss-reporter'),
-    stylelint = require('stylelint'),
+    postcss     = require('gulp-postcss'),
+    reporter    = require('postcss-reporter'),
+    stylelint   = require('stylelint'),
     dom         = require('gulp-dom'),
     replace     = require('gulp-replace'),
     beautify    = require('gulp-beautify'),
@@ -36,8 +36,8 @@ function getVersion(path) {
 }
 
 function getColorPath() {
-    var obj = JSON.parse(fs.readFileSync('../thumbprint-ui/packages/tp-ui-core-color/package.json', 'utf8'));
-    var path = './dist/tp-ui-core-color/' + obj.version;
+    var obj = JSON.parse(fs.readFileSync('../thumbprint-ui/packages/tp-ui-core-variable-color/package.json', 'utf8'));
+    var path = './dist/tp-ui-core-variable-color/' + obj.version;
     return path;
 }
 
@@ -87,19 +87,14 @@ gulp.task('build:packages:sass', function () {
 // for easier documentation.
 // TODO: convert variables to JSON.
 gulp.task('build:color:json', function(){
-    gulp.src('../thumbprint-ui/packages/tp-ui-core-color/_index.scss')
+    gulp.src('../thumbprint-ui/packages/tp-ui-core-variable-color/_index.scss')
         .pipe(replace(/^@import.*;/gm, "")) // remove import statements
         .pipe(replace(/ ?(\/\/ ?.*)/gm, "")) // remove comments
         .pipe(replace(/^\s*\n/gm, "")) // remove blank lines
         .pipe(replace(/\;/g, ",")) // change ; to ,
-        .pipe(replace(/([a-zA-Z0-9$\-\#]+)\s*:\s*([a-zA-Z0-9\-\#\$]+ ?[a-zA-Z0-9.,\-\#\'\%\$ ?\(\)]+)/gm, "\"$1\":\"$2\"")) // wrap pairs in quotes
-        .pipe(replace(/([a-zA-Z0-9$\-]+) ?:/g, "\"$1\":")) // convert parent variable names
-        .pipe(replace(/,"/g, "\",")) // swap comma with last closing quote in pairs
-        .pipe(replace(/(.*)(\()$/gm, "$1 {")) // convert ( to { where needed
-        .pipe(replace(/^(\s+|)(\))/gm, "$1}")) // convert ) to } where needed
-        .pipe(replace(/.*(}),\n$/gm, "$1\n")) // remove final comma
+        .pipe(replace(/([#|$][a-z0-9-_]+)/gm, "\"$1\"")) // wrap each string in quotes
         .pipe(wrap('{\n<%= contents %>}')) // wrap contents in {} for valid JSON
-        .pipe(beautify({indent_size: 4})) // indent file
+        .pipe(replace(/,(\n})/gm, "$1")) // remove final comma
         .pipe(rename('var-color.json'))
         .pipe(gulp.dest('./dist/assets/data'));
 });

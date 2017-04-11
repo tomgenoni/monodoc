@@ -73,12 +73,12 @@
         <li>
             <div class="section">{{title}}</div>
             <ul class="meta">
-            {{#each meta}}
+            {{#each colors}}
                 <li>
                     <div class="swatch" style="background-color: {{hex}}"></div>
-                    <div class="swatch-name">{{../title}}.{{name}}</div>
+                    <div class="swatch-name">{{varName variable}}</div>
                     <div class="swatch-hex">{{hex}}</div>
-                    <div class="swatch-sass">{{sassVar}};</div>
+                    <div class="swatch-sass">{{variable}};</div>
                 </li>
             {{/each}}
             </ul>
@@ -106,38 +106,54 @@
             return obj;
         }
 
+        var colorData = [
+            {
+                title: "links",
+                colors: []
+            },
+            {
+                title: "text",
+                colors: []
+            },
+            {
+                title: "ui",
+                colors: []
+            }
+        ]
+
+
         $.getJSON( "../../assets/data/var-color.json", function(data) {
 
+            $.each(data, function(title, val) {
 
-            var colors = data['$tp-color'];
-            var colorData = [];
-            var counter = 0;
-
-            $.each(colors, function(title, val) {
-
-                // section title
-                colorData.push({
-                   title: title,
-                   meta: []
-                });
-
-                var values = [];
-
-                $.each(val, function(name, sassVar) {
-
-                    // get hex value
-                    var jsonPath = sassVar.replace(/tp-get\((.*)\)/gm, "$1");
-                    jsonPath = jsonPath.replace(/,\s*/g, ".");
-                    var hex = ref(data, jsonPath);
-
-                    colorData[counter].meta.push({
-                        name: name,
-                        sassVar: 'tp-get($colors, '+ title +', '+name+')',
+                if ( title.includes('__link') ) {
+                    var hex = ref(data, val);
+                    colorData[0].colors.push({
+                        variable: title,
                         hex: hex
-                    });
-                });
+                    })
+                }
 
-                counter++
+                if ( title.includes('__text') ) {
+                    var hex = ref(data, val);
+                    colorData[1].colors.push({
+                        variable: title,
+                        hex: hex
+                    })
+                }
+
+                if ( title.includes('__ui') ) {
+                    var hex = ref(data, val);
+                    colorData[2].colors.push({
+                        variable: title,
+                        hex: hex
+                    })
+                }
+            });
+
+            Handlebars.registerHelper("varName", function(str) {
+                var cleaned = str.replace('$tp-color__','')
+                return cleaned;
             });
 
             var template = Handlebars.compile(hdbSwatches.textContent);
