@@ -26,7 +26,7 @@
         }
 
         .section {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 500;
             margin-top: 30px;
             margin-bottom: 20px;
@@ -40,6 +40,7 @@
             margin-left: -20px;
             padding-left: 0;
             list-style: none;
+            line-height: 1.6;
         }
 
         .meta > li {
@@ -55,7 +56,7 @@
         }
 
         h1 {
-            font-size: 40px;
+            font-size: 32px;
             font-weight: 500;
         }
 
@@ -126,7 +127,7 @@
 
             $.each(data, function(title, val) {
 
-                if ( title.includes('__link') ) {
+                if ( title.includes('tp-color__link') ) {
                     var hex = ref(data, val);
                     colorData[0].colors.push({
                         variable: title,
@@ -134,7 +135,7 @@
                     })
                 }
 
-                if ( title.includes('__text') ) {
+                if ( title.includes('tp-color__text') ) {
                     var hex = ref(data, val);
                     colorData[1].colors.push({
                         variable: title,
@@ -142,7 +143,7 @@
                     })
                 }
 
-                if ( title.includes('__ui') ) {
+                if ( title.includes('tp-color__ui') ) {
                     var hex = ref(data, val);
                     colorData[2].colors.push({
                         variable: title,

@@ -74,6 +74,7 @@
     background: #444;
 }
 
+.doc-wrap > pre,
 .doc-pre-example {
     margin: 0;
     position: relative;

@@ -4,11 +4,8 @@ $tp-include-fonts: '400', '500', '600';
 @import "../../../thumbprint-ui/packages/tp-ui-core-font-face/_index";
 @import "../../../thumbprint-ui/packages/tp-ui-core-function/_index";
 @import "../../../thumbprint-ui/packages/tp-ui-core-mixin/_index";
-@import "../../../thumbprint-ui/packages/tp-ui-core-variable/_index";
-@import "../../../thumbprint-ui/packages/tp-ui-core-variable-color/_index";
-@import "../../../thumbprint-ui/packages/tp-ui-core-variable-type/_index";
-
 @import "../../../thumbprint-ui/packages/tp-ui-core-reset/_index";
+@import "../../../thumbprint-ui/packages/tp-ui-core-variable/_index";
 
 @import "../../../thumbprint-ui/packages/tp-ui-element-a/_index";
 @import "../../../thumbprint-ui/packages/tp-ui-element-body/_index";
@@ -19,12 +16,11 @@ $tp-include-fonts: '400', '500', '600';
 @import "../../../thumbprint-ui/packages/tp-ui-element-img/_index";
 @import "../../../thumbprint-ui/packages/tp-ui-element-input/_index";
 @import "../../../thumbprint-ui/packages/tp-ui-element-label/_index";
-@import "../../../thumbprint-ui/packages/tp-ui-element-ol/_index";
+@import "../../../thumbprint-ui/packages/tp-ui-element-list/_index";
 @import "../../../thumbprint-ui/packages/tp-ui-element-radio/_index";
 @import "../../../thumbprint-ui/packages/tp-ui-element-select/_index";
 @import "../../../thumbprint-ui/packages/tp-ui-element-table/_index";
 @import "../../../thumbprint-ui/packages/tp-ui-element-textarea/_index";
-@import "../../../thumbprint-ui/packages/tp-ui-element-ul/_index";
 @import "../../../thumbprint-ui/packages/tp-ui-element-type/_index";
 
 @import "../../../thumbprint-ui/packages/tp-ui-layout-block-list/_index";

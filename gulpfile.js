@@ -36,8 +36,8 @@ function getVersion(path) {
 }
 
 function getColorPath() {
-    var obj = JSON.parse(fs.readFileSync('../thumbprint-ui/packages/tp-ui-core-variable-color/package.json', 'utf8'));
-    var path = './dist/tp-ui-core-variable-color/' + obj.version;
+    var obj = JSON.parse(fs.readFileSync('../thumbprint-ui/packages/tp-ui-core-variable/package.json', 'utf8'));
+    var path = './dist/tp-ui-core-variable/' + obj.version;
     return path;
 }
 
@@ -87,12 +87,13 @@ gulp.task('build:packages:sass', function () {
 // for easier documentation.
 // TODO: convert variables to JSON.
 gulp.task('build:color:json', function(){
-    gulp.src('../thumbprint-ui/packages/tp-ui-core-variable-color/_index.scss')
+    gulp.src('../thumbprint-ui/packages/tp-ui-core-variable/_index.scss')
         .pipe(replace(/^@import.*;/gm, "")) // remove import statements
         .pipe(replace(/ ?(\/\/ ?.*)/gm, "")) // remove comments
         .pipe(replace(/^\s*\n/gm, "")) // remove blank lines
+        .pipe(replace(/([#|$|0-9a-z|-][a-zA-Z0-9-_\(\)'%,.\s]+)/gm, "\"$1\"")) // wrap each string in quotes
         .pipe(replace(/\;/g, ",")) // change ; to ,
-        .pipe(replace(/([#|$][a-z0-9-_]+)/gm, "\"$1\"")) // wrap each string in quotes
+        .pipe(replace(/\s\s+/g, "")) // replace multiple spaces with single
         .pipe(wrap('{\n<%= contents %>}')) // wrap contents in {} for valid JSON
         .pipe(replace(/,(\n})/gm, "$1")) // remove final comma
         .pipe(rename('var-color.json'))

@@ -28,6 +28,7 @@
 </head>
 <body class="doc-package">
     <div class="doc-wrap">
+        <div class="tp-margin--bottom tp-text-3--static"><a href="/index.html">&larr; Index</a></div>
         <h2><%= packageJSON.thumbprint.displayName %></h2>
         <table class="doc-meta">
             <tr>
@@ -40,7 +41,7 @@
             </tr>
             <tr>
                 <td>Install</td>
-                <td><code>npm install <%= packageJSON.name %> --save-dev</code></td>
+                <td><code>yarn add <%= packageJSON.name %> --exact</code></td>
             </tr>
         </table>
 
