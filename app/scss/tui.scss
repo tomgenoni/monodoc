@@ -1,3 +1,4 @@
+// TODO: build this page dynamically
 // Include the font weights and variations here. You may not need italics.
 $tp-include-fonts: '400', '500', '600';
 
@@ -30,12 +31,12 @@ $tp-include-fonts: '400', '500', '600';
 @import "../../../thumbprint-ui/packages/tp-ui-layout-input-row/_index";
 @import "../../../thumbprint-ui/packages/tp-ui-layout-wrap/_index";
 
+@import "../../../thumbprint-ui/packages/tp-ui-component-avatar/_index";
+@import "../../../thumbprint-ui/packages/tp-ui-component-loader/_index";
+
 @import "../../../thumbprint-ui/packages/tp-ui-utility-background/_index";
 @import "../../../thumbprint-ui/packages/tp-ui-utility-layout/_index";
 @import "../../../thumbprint-ui/packages/tp-ui-utility-margin/_index";
 @import "../../../thumbprint-ui/packages/tp-ui-utility-padding/_index";
 @import "../../../thumbprint-ui/packages/tp-ui-utility-sizing/_index";
 @import "../../../thumbprint-ui/packages/tp-ui-utility-type/_index";
-
-@import "../../../thumbprint-ui/packages/tp-ui-component-avatar/_index";
-@import "../../../thumbprint-ui/packages/tp-ui-component-loader/_index";

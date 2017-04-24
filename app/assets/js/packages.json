@@ -1,0 +1,52 @@
+
+{
+    "name": "@thumbtack/tp-ui-element-button",
+    "description": "Button description",
+    "dist-tags": {
+        "latest": "0.1.4"
+    },
+    "versions": [
+        "0.1.0",
+        "0.1.1",
+        "0.1.2",
+        "0.1.3",
+        "0.1.4"
+    ],
+    "etag": "0.30591391532244416",
+    "version": "0.1.4",
+    "main": "_index.scss",
+    "scripts": {},
+    "dependencies": {
+        "@thumbtack/tp-ui-core-variable": "0.1.2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/thumbtack/thumbprint-ui.git"
+    },
+    "publishConfig": {
+        "registry": "https://production-npm.thumbtack.com"
+    },
+    "author": "Tom Genoni <tom@atomeye.com> (http://atomeye.com/)",
+    "contributors": [
+        "Daniel O'Connor <daniel@danoc.me> (https://danoc.me/)"
+    ],
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/thumbtack/thumbprint-ui/issues"
+    },
+    "homepage": "https://github.com/thumbtack/thumbprint-ui/packages/tp-ui-element-button/#readme",
+    "thumbprint": {
+        "category": "element",
+        "displayName": "Button",
+        "connected": [
+            "@thumbtack/tp-ui-element-select"
+        ]
+    },
+    "devDependencies": {},
+    "readme": "# `tp-ui-element-button`\n\n## Button\n\nA button communicates what action will occur when the user touches it. It consists of text, an icon, or both. Usually used wrapped with `tp-button-row` to provide correct spacing between buttons.\n\n<div class=\"doc-example\">\n    <div class=\"tp-button-row\">\n        <button class=\"tp-button\">Click Me</button>\n        <button class=\"tp-button tp-button--secondary\">Click Me</button>\n        <button class=\"tp-button tp-button--tertiary\">Click Me</button>\n        <button class=\"tp-button tp-button--bad-news\">Click Me</button>\n    </div>\n</div>\n\nAnchors as buttons.\n\n<div class=\"doc-example\">\n    <div class=\"tp-button-row\">\n        <a href=\"#0\" class=\"tp-button\">Click Me</a>\n        <a href=\"#0\" class=\"tp-button tp-button--secondary\">Click Me</a>\n        <a href=\"#0\" class=\"tp-button tp-button--tertiary\">Click Me</a>\n        <a href=\"#0\" class=\"tp-button tp-button--bad-news\">Click Me</a>\n    </div>\n</div>\n\n## Wider Button Spacing Variation\n\n<div class=\"doc-example\">\n    <div class=\"tp-button-row tp-button-row--wide\">\n        <button class=\"tp-button\">Click Me</button>\n        <button class=\"tp-button tp-button--secondary\">Click Me</button>\n        <button class=\"tp-button tp-button--tertiary\">Click Me</button>\n        <button class=\"tp-button tp-button--bad-news\">Click Me</button>\n    </div>\n</div>\n\n## Button Right\n\n<div class=\"doc-example\">\n    <div class=\"tp-button-row tp-button-row--right\">\n        <button class=\"tp-button\">Click Me</button>\n        <button class=\"tp-button tp-button--secondary\">Click Me</button>\n        <button class=\"tp-button tp-button--tertiary\">Click Me</button>\n        <button class=\"tp-button tp-button--bad-news\">Click Me</button>\n    </div>\n</div>\n\n## Button Center\n\n<div class=\"doc-example\">\n    <div class=\"tp-button-row tp-button-row--center\">\n        <button class=\"tp-button\">Click Me</button>\n        <button class=\"tp-button tp-button--secondary\">Click Me</button>\n        <button class=\"tp-button tp-button--tertiary\">Click Me</button>\n        <button class=\"tp-button tp-button--bad-news\">Click Me</button>\n    </div>\n</div>\n\n## Button Small\n\n<div class=\"doc-example\">\n    <div class=\"tp-button-row\">\n        <button class=\"tp-button tp-button--small\">Click Me</button>\n        <button class=\"tp-button tp-button--small tp-button--secondary\">Click Me</button>\n        <button class=\"tp-button tp-button--small tp-button--tertiary\">Click Me</button>\n        <button class=\"tp-button tp-button--small tp-button--bad-news\">Click Me</button>\n    </div>\n</div>\n\n## Button Large\n\n<div class=\"doc-example\">\n    <div class=\"tp-button-row\">\n        <button class=\"tp-button tp-button--large\">Click Me</button>\n        <button class=\"tp-button tp-button--large tp-button--secondary\">Click Me</button>\n        <button class=\"tp-button tp-button--large tp-button--tertiary\">Click Me</button>\n        <button class=\"tp-button tp-button--large tp-button--bad-news\">Click Me</button>\n    </div>\n</div>\n\n## Button Narrow\n\nFor use in tight spaces, for example a row of navigation icons.\n\n<div class=\"doc-example\">\n    <div class=\"tp-button-row\">\n        <button class=\"tp-button tp-button--small tp-button--narrow\">Click Me</button>\n        <button class=\"tp-button tp-button--small tp-button--narrow tp-button--secondary\">Click Me</button>\n        <button class=\"tp-button tp-button--small tp-button--narrow tp-button--tertiary\">Click Me</button>\n        <button class=\"tp-button tp-button--small tp-button--narrow tp-button--bad-news\">Click Me</button>\n    </div>\n</div>\n\n<div class=\"doc-example\">\n    <div class=\"tp-button-row\">\n        <button class=\"tp-button tp-button--narrow\">Click Me</button>\n        <button class=\"tp-button tp-button--narrow tp-button--secondary\">Click Me</button>\n        <button class=\"tp-button tp-button--narrow tp-button--tertiary\">Click Me</button>\n        <button class=\"tp-button tp-button--narrow tp-button--bad-news\">Click Me</button>\n    </div>\n</div>\n\n\n<div class=\"doc-example\">\n    <div class=\"tp-button-row\">\n        <button class=\"tp-button tp-button--large tp-button--narrow\">Click Me</button>\n        <button class=\"tp-button tp-button--large tp-button--narrow tp-button--secondary\">Click Me</button>\n        <button class=\"tp-button tp-button--large tp-button--narrow tp-button--tertiary\">Click Me</button>\n        <button class=\"tp-button tp-button--large tp-button--narrow tp-button--bad-news\">Click Me</button>\n    </div>\n</div>\n\n## Button Full\n\n<div class=\"doc-example\">\n    <div class=\"tp-button-row\">\n        <button class=\"tp-button tp-button--full\">Click Me</button>\n    </div>\n</div>\n\n## Button Disabled\n\n<div class=\"doc-example\">\n    <div class=\"tp-button-row\">\n        <button class=\"tp-button\" disabled=\"disabled\">Click Me</button>\n        <button class=\"tp-button tp-button--secondary\" disabled=\"disabled\">Click Me</button>\n        <button class=\"tp-button tp-button--tertiary\" disabled=\"disabled\">Click Me</button>\n        <button class=\"tp-button tp-button--bad-news\" disabled=\"disabled\">Click Me</button>\n    </div>\n</div>\n\n## Disabled anchors as buttons\n\nUse classes instead of `disabled` attribute.\n\n<div class=\"doc-example\">\n    <div class=\"tp-button-row\">\n        <a class=\"tp-button tp-button--disabled\">Click Me</a>\n        <a class=\"tp-button tp-button--secondary tp-button--disabled\">Click Me</a>\n        <a class=\"tp-button tp-button--tertiary tp-button--disabled\">Click Me</a>\n        <a class=\"tp-button tp-button--bad-news tp-button--disabled\">Click Me</a>\n    </div>\n</div>\n",
+    "readmeFilename": "README.md",
+    "dist": {
+        "shasum": "0fd092057cbc297b31b37f83de74fa8976eabebd",
+        "tarball": "https://production-npm.thumbtack.com/@thumbtack/tp-ui-element-button/-/@thumbtack/tp-ui-element-button-0.1.4/0fd092057cbc297b31b37f83de74fa8976eabebd.tgz"
+    }
+}
